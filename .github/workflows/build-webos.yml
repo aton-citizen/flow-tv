@@ -1,0 +1,35 @@
+name: Gerar instalador Flow TV para LG
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'webos-bridge/**'
+      - '.github/workflows/build-webos.yml'
+permissions:
+  contents: read
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obter código do Flow TV
+        uses: actions/checkout@v4
+      - name: Preparar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Instalar ferramenta oficial webOS CLI
+        run: npm install --global @webos-tools/cli
+      - name: Empacotar aplicativo LG
+        shell: bash
+        run: |
+          mkdir -p dist
+          cd webos-bridge
+          ares-package .
+          mv com.flowtv.launcher_0.4.0_all.ipk ../dist/
+          test -s ../dist/com.flowtv.launcher_0.4.0_all.ipk
+      - name: Disponibilizar instalador
+        uses: actions/upload-artifact@v4
+        with:
+          name: Flow-TV-LG-v0.4.0
+          path: dist/*.ipk
+          retention-days: 30
