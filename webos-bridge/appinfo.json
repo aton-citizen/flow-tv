@@ -1,9 +1,13 @@
 {
   "id": "com.flowtv.launcher",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "vendor": "Flow TV",
   "type": "web",
   "main": "index.html",
   "title": "Flow TV",
-  "requiredACG": []
+  "icon": "icon.png",
+  "largeIcon": "largeIcon.png",
+  "resolution": "1920x1080",
+  "requiredACG": [],
+  "disableBackHistoryAPI": true
 }
