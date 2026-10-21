@@ -1,0 +1,9 @@
+{
+  "id": "com.flowtv.launcher",
+  "version": "0.3.0",
+  "vendor": "Flow TV",
+  "type": "web",
+  "main": "index.html",
+  "title": "Flow TV",
+  "requiredACG": []
+}
