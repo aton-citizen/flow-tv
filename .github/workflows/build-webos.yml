@@ -19,6 +19,30 @@ jobs:
           node-version: '22'
       - name: Instalar ferramenta oficial webOS CLI
         run: npm install --global @webos-tools/cli
+      - name: Gerar ícone Flow TV
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import struct, zlib
+          from pathlib import Path
+          size=128
+          rows=[]
+          for y in range(size):
+              row=bytearray()
+              for x in range(size):
+                  c=(22,38,85,255) if y<64 else (63,45,139,255)
+                  if 16<x<112 and 16<y<112:
+                      c=(30,57,138,255) if y<64 else (77,61,190,255)
+                  if ((39<=x<=54 and 37<=y<=102) or (39<=x<=90 and 37<=y<=49) or (39<=x<=79 and 64<=y<=76)):
+                      c=(248,250,255,255)
+                  row.extend(c)
+              rows.append(b'\x00'+bytes(row))
+          def chunk(tag,data):
+              return struct.pack('>I',len(data))+tag+data+struct.pack('>I',zlib.crc32(tag+data)&0xffffffff)
+          image=b'\x89PNG\r\n\x1a\n'+chunk(b'IHDR',struct.pack('>IIBBBBB',size,size,8,6,0,0,0))+chunk(b'IDAT',zlib.compress(b''.join(rows),9))+chunk(b'IEND',b'')
+          Path('webos-bridge/icon.png').write_bytes(image)
+          print('Ícone criado:', len(image),'bytes')
+          PY
       - name: Empacotar aplicativo LG
         shell: bash
         run: |
