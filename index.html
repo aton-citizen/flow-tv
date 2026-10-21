@@ -101,7 +101,7 @@ function close(){qs("#overlay").classList.add("hidden");}
 var nativePending={}, nativeSequence=0;
 window.addEventListener("message",function(e){
   var data=e.data;
-  if(!data || data.flowTV !== "bridge-result" || !data.requestId)return;
+  if(!data || data.flowTV !== "bridge-result" || !data.requestId || e.source!==window.parent)return;
   if(e.origin!=="https://aton-citizen.github.io" && e.origin!=="null")return;
   var fn=nativePending[data.requestId];
   if(!fn)return;
@@ -203,6 +203,7 @@ function focusables(){return all("button,input").filter(function(b){var r=b.getB
 function spatial(code){var items=focusables(),a=d.activeElement;if(items.indexOf(a)<0){if(items[0])items[0].focus();return;}var ar=a.getBoundingClientRect(),x=ar.left+ar.width/2,y=ar.top+ar.height/2,best=null,score=1e9;items.forEach(function(n){if(n===a)return;var r=n.getBoundingClientRect(),xx=r.left+r.width/2,yy=r.top+r.height/2,dx=xx-x,dy=yy-y;if((code===37&&dx>=-8)||(code===39&&dx<=8)||(code===38&&dy>=-8)||(code===40&&dy<=8))return;var primary=(code===37||code===39)?Math.abs(dx):Math.abs(dy),secondary=(code===37||code===39)?Math.abs(dy):Math.abs(dx),s=primary+secondary*2.5;if(s<score){score=s;best=n;}});if(best){best.focus();try{best.scrollIntoView({block:"nearest",inline:"nearest"});}catch(e){}}}
 d.addEventListener("keydown",function(e){var code=e.keyCode||e.which;if(qs("#lastkey"))qs("#lastkey").textContent=e.key||String(code);if(e.target.tagName==="INPUT"&&code!==27&&code!==461)return;if([37,38,39,40].indexOf(code)>=0){e.preventDefault();spatial(code);}else if(code===13&&d.activeElement&&d.activeElement.click&&d.activeElement.tagName!=="INPUT"){e.preventDefault();d.activeElement.click();}else if(code===27||code===461||code===8){e.preventDefault();if(!qs("#overlay").classList.contains("hidden"))close();else if(previous.length)show(previous.pop(),false);else show("home",false);}});
 setTimeout(function(){var b=qs('#nav [data-page="home"]');if(b)b.focus();},150);
+try{if(window.parent!==window)window.parent.postMessage({flowTV:"bridge-ready"},"*");}catch(ex){}
 })();
 </script>
 </body></html>
