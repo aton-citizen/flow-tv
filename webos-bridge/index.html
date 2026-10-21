@@ -1,1 +1,82 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Flow TV · Conectando</title><style>body{font-family:Arial,sans-serif;background:#071125;color:white;display:grid;place-items:center;min-height:100vh;margin:0}main{text-align:center;max-width:650px;padding:25px}h1{font-size:38px}p{color:#bdcde6;line-height:1.65}</style></head><body><main><h1>Flow TV</h1><p>Abrindo interface online… É necessário ter conexão com a internet.</p><p id="status"></p></main><script>setTimeout(function(){window.location.replace("https://aton-citizen.github.io/flow-tv/");},250);setTimeout(function(){var x=document.getElementById("status");if(x)x.textContent="Se a interface não abrir, confira se o GitHub Pages está publicado e se a TV tem acesso à internet.";},5000);</script></body></html>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flow TV · LG Bridge</title>
+<style>
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#070f20;color:#eaf0ff;font-family:Arial,sans-serif}
+iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#070f20}
+#loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#071223,#192455);z-index:10;text-align:center}
+#loading.done{display:none}h1{font-size:54px;letter-spacing:-2px;margin:0 0 12px}
+p{font-size:22px;line-height:1.5;color:#bfcae5;max-width:680px}
+#retry{display:none;border:1px solid #889cce;border-radius:14px;background:#263960;color:white;font:22px Arial;padding:15px 28px;margin:24px auto}
+</style>
+</head>
+<body>
+<iframe id="flow" title="Flow TV Online" src="https://aton-citizen.github.io/flow-tv/?tv=1"></iframe>
+<div id="loading"><div><h1>Flow TV</h1><p id="status">Conectando a interface e preparando a integração com a LG...</p><button id="retry">Tentar novamente</button></div></div>
+<script>
+(function(){
+"use strict";
+var origin="https://aton-citizen.github.io";
+var frame=document.getElementById("flow");
+var loading=document.getElementById("loading");
+var status=document.getElementById("status");
+var timer=setTimeout(function(){
+  status.textContent="A interface não respondeu. Verifique a conexão da TV e abra o GitHub Pages no navegador.";
+  document.getElementById("retry").style.display="block";
+},15000);
+document.getElementById("retry").onclick=function(){
+  status.textContent="Reconectando...";document.getElementById("retry").style.display="none";
+  frame.src="https://aton-citizen.github.io/flow-tv/?tv=1&retry="+Date.now();
+};
+var allowed={
+  "netflix":true,
+  "youtube.leanback.v4":true,
+  "amazon":true,
+  "spotify-beehive":true
+};
+function reply(requestId,result){
+  try{frame.contentWindow.postMessage({flowTV:"bridge-result",requestId:requestId,result:result},origin);}catch(e){}
+}
+function launch(requestId,id){
+  if(typeof id!=="string" || !allowed[id]){reply(requestId,{returnValue:false,errorText:"ID do app não permitido nesta versão: "+String(id)});return;}
+  var uri="luna://com.webos.applicationManager";
+  var finished=false;
+  function done(value){if(finished)return;finished=true;reply(requestId,value);}
+  if(window.webOS && webOS.service && typeof webOS.service.request==="function"){
+    try{
+      webOS.service.request(uri,{method:"launch",parameters:{id:id},onSuccess:done,onFailure:done});
+      setTimeout(function(){done({returnValue:false,errorText:"Sem retorno da API (12s)"});},12000);
+      return;
+    }catch(e){done({returnValue:false,errorText:e.message});return;}
+  }
+  if(typeof window.PalmServiceBridge==="function"){
+    try{
+      var bridge=new window.PalmServiceBridge();
+      bridge.onservicecallback=function(raw){try{done(JSON.parse(raw));}catch(e){done({returnValue:false,errorText:"Resposta inválida da TV"});}};
+      bridge.call(uri+"/launch",JSON.stringify({id:id}));
+      setTimeout(function(){done({returnValue:false,errorText:"Sem retorno da API (12s)"});},12000);
+      return;
+    }catch(e){done({returnValue:false,errorText:e.message});return;}
+  }
+  done({returnValue:false,errorText:"webOS não disponibilizou a API nesta janela do aplicativo."});
+}
+window.addEventListener("message",function(event){
+  if(event.origin!==origin || event.source!==frame.contentWindow)return;
+  var d=event.data;
+  if(!d || typeof d!=="object")return;
+  if(d.flowTV==="bridge-ready"){
+    clearTimeout(timer);loading.classList.add("done");return;
+  }
+  if(d.flowTV!=="bridge-request" || !d.requestId)return;
+  if(d.method!=="launch"){reply(d.requestId,{returnValue:false,errorText:"Operação não permitida"});return;}
+  launch(d.requestId,d.parameters && d.parameters.id);
+});
+frame.addEventListener("load",function(){
+  setTimeout(function(){if(!loading.classList.contains("done")){loading.classList.add("done");clearTimeout(timer);}},5500);
+});
+})();
+</script>
+</body>
+</html>
