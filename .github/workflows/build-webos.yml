@@ -4,8 +4,6 @@ on:
   push:
     paths:
       - 'webos-bridge/**'
-      - 'index.html'
-      - 'assets/**'
       - '.github/workflows/build-webos.yml'
 permissions:
   contents: read
