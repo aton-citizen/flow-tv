@@ -3,207 +3,359 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#071123">
-<title>Flow TV · Sua TV, do seu jeito</title>
+<meta name="theme-color" content="#080e17">
+<title>Flow TV — Seu espaço, seus apps</title>
 <style>
-:root{--accent:#8b7dff;--bg:#06101e;--panel:#101d34;--edge:#ffffff17;--text:#f5f7ff;--muted:#a8b4ca;--hero-a:#172c5e;--hero-b:#65428b}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;color:var(--text);background:var(--bg);font-family:Inter,"Segoe UI",Arial,sans-serif}button,input{font:inherit}button{cursor:pointer;user-select:none}body{overflow-x:hidden;background:radial-gradient(ellipse at 80% -30%,#1a2a58,transparent 55%),#06101e}
-.shell{display:flex;min-height:100vh}.sidebar{position:fixed;z-index:5;top:0;bottom:0;width:205px;padding:30px 17px;background:linear-gradient(180deg,#07162c,#08152c 72%,#172256);border-right:1px solid var(--edge);display:flex;flex-direction:column}.brand{display:flex;align-items:center;gap:10px;font-size:25px;font-weight:800;letter-spacing:-1.7px;margin:0 6px 49px}.brand .mark{display:grid;place-items:center;background:linear-gradient(140deg,#5fd0f7,#735bff);width:38px;height:38px;border-radius:13px;color:white;font-size:27px}.brand span.light{font-weight:300;color:#bbbefd}.category{font-size:10px;letter-spacing:3px;color:#788eae;font-weight:700;margin:0 13px 16px}.nav{display:flex;align-items:center;gap:15px;width:100%;border:1px solid transparent;text-align:left;padding:14px 12px;margin:3px 0;border-radius:12px;color:#bec9dc;background:transparent;font-size:14px}.nav .symbol{font-size:20px;width:22px;text-align:center}.nav.active,.nav:hover,.nav:focus{background:linear-gradient(100deg,#1c3460,#172744);color:#fff;border-color:#6688ff38}.sideend{margin-top:auto;font-size:11px;line-height:1.6;color:#7991b3;padding:12px}.main{margin-left:205px;width:calc(100% - 205px);padding:26px 40px 65px;max-width:2000px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:22px}.eyebrow{font-size:10px;letter-spacing:2px;font-weight:700;color:#a7b7d5}.eyebrow:before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:#42e3c3;box-shadow:0 0 9px #36dcbb;margin-right:10px}.topactions{display:flex;align-items:center;gap:18px;font-size:13px;color:#d1dcf0}.round,.avatar{border:1px solid #ffffff2b;background:#182a48;color:white;border-radius:50%;height:37px;width:37px}.avatar{background:linear-gradient(130deg,#775ce8,#248ac1);font-weight:700}.page{display:none}.page.active{display:block}.hero{position:relative;min-height:370px;overflow:hidden;border:1px solid var(--edge);border-radius:22px;background:linear-gradient(90deg,#061125f8 0%,#071126df 27%,transparent 70%),linear-gradient(130deg,var(--hero-a),var(--hero-b));box-shadow:0 22px 65px #0005}.hero:before{content:"";position:absolute;right:10%;top:-170px;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle at 30% 27%,#e0d3c9,#847a9b 32%,#2e416b 72%,#121a3a 100%);box-shadow:0 0 140px #8c79bd88, inset -40px -35px 70px #101a3ab3}.hero:after{content:"";position:absolute;bottom:-90px;right:0;width:72%;height:240px;background:linear-gradient(140deg,transparent 15%,#07152a 18%,#162d48 32%,#07172d 33%,#0d203d 52%,#071126 53%);clip-path:polygon(0 100%,13% 65%,26% 75%,39% 24%,54% 61%,67% 5%,84% 38%,100% 0,100% 100%);opacity:.95}.hero .copy{position:relative;z-index:2;padding:54px 48px;max-width:680px}.kicker{font-size:11px;letter-spacing:2.8px;color:#bdd7ff;font-weight:700}.hero h1{font-size:clamp(47px,6vw,93px);font-weight:300;letter-spacing:17px;margin:20px 0 0}.hero h1 small{display:block;font-size:16px;letter-spacing:9px;margin:6px 0 18px 5px;font-weight:400}.hero p{max-width:420px;color:#bfcce0;line-height:1.65;font-size:14px}.chips{display:flex;gap:9px;margin:19px 0 23px}.chip{border-radius:20px;background:#ffffff17;border:1px solid #ffffff22;padding:6px 12px;color:#cdd8e9;font-size:11px}.actions{display:flex;gap:13px}.primary,.secondary{border-radius:11px;padding:13px 22px;font-weight:700;font-size:13px;border:1px solid #ffffff30}.primary{background:#e7eeff;color:#0e1933;box-shadow:0 2px 19px #778dff80}.secondary{background:#0e1c36bd;color:white}.sectionhead{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin:27px 0 14px}.sectionhead h2,.pageintro h1{margin:0;font-size:20px;letter-spacing:-.5px}.sectionhead p,.pageintro p{margin:6px 0 0;color:#91a5c2;font-size:12px}.link{background:transparent;color:#a7bafb;border:0;font-size:12px;padding:10px}.apps{display:grid;grid-template-columns:repeat(7,minmax(90px,1fr));gap:11px}.tile{min-height:77px;display:flex;align-items:center;justify-content:center;border-radius:13px;background:linear-gradient(155deg,#172743,#0d182d);border:1px solid var(--edge);font-size:19px;font-weight:800;color:white}.tile:hover,.tile:focus,.poster:hover,.poster:focus,.device:hover,.device:focus{transform:translateY(-3px);background-color:#24365a}.netflix{color:#ff3150;letter-spacing:-1px}.youtube{font-size:16px}.youtube i{font-style:normal;background:#f03241;color:white;padding:5px 8px;border-radius:6px;margin-right:7px}.prime{background:linear-gradient(125deg,#027af7,#0642a0);font-size:17px}.disney{font-style:italic;font-weight:600}.max{background:linear-gradient(130deg,#7208e0,#261177);font-size:25px}.spotify{color:#39d48d;font-size:17px}.tile.more{font-size:14px;font-weight:600;color:#c3d7f5}.posters{display:grid;grid-template-columns:repeat(6,minmax(95px,1fr));gap:13px}.poster{border:1px solid #ffffff20;background:#132744;min-height:146px;border-radius:12px;overflow:hidden;text-align:left;color:white;padding:0}.poster .art{display:flex;align-items:end;padding:14px 13px;height:113px;background:linear-gradient(0deg,#061021db,transparent 75%),linear-gradient(140deg,var(--a),var(--b));font-size:17px;letter-spacing:-.5px;font-weight:750;text-shadow:0 2px 10px #0008}.poster small{display:block;padding:9px 11px;color:#b6c5dd;font-size:11px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}.devices{display:grid;grid-template-columns:repeat(4,minmax(110px,1fr));gap:12px}.device{border:1px solid var(--edge);background:linear-gradient(125deg,#1b2c4c,#101e37);border-radius:13px;min-height:80px;padding:17px;text-align:left;color:white;display:flex;align-items:center;gap:14px;font-weight:700}.device span{font-size:24px;color:#aaa2ff}.device small{display:block;font-size:11px;color:#9fb1cb;margin-top:5px;font-weight:400}.pageintro{margin:42px 0 24px}.pageintro .kicker{display:block;margin-bottom:12px}.pageintro h1{font-size:36px}.group{border-radius:17px;background:#111e35bb;border:1px solid var(--edge);padding:22px;margin-bottom:19px}.group h2{font-size:17px;margin:0 0 16px}.group p{color:#9bacc7;font-size:13px;line-height:1.6}.gridtwo{display:grid;grid-template-columns:1fr 1fr;gap:19px}.themegrid,.profiles,.swatches{display:flex;flex-wrap:wrap;gap:12px}.theme,.profile{border:1px solid #ffffff24;background:#1b2943;border-radius:13px;min-width:100px;padding:16px;color:#fff}.theme.active,.profile.active{border-color:var(--accent);box-shadow:0 0 0 2px #8471ff3d}.theme .sample{width:95px;height:60px;border-radius:9px;display:block;margin-bottom:10px;background:linear-gradient(135deg,#121f47,#7255ad)}.theme[data-theme=aurora] .sample{background:linear-gradient(130deg,#15364d,#239e81)}.theme[data-theme=midnight] .sample{background:linear-gradient(130deg,#080c1a,#273b64)}.theme[data-theme=dawn] .sample{background:linear-gradient(130deg,#aa6c80,#ebbd75)}.color{background:var(--c);height:31px;width:31px;border:2px solid #ffffff3d;border-radius:50%;padding:0}.color.active{outline:2px solid white;outline-offset:3px}.toggle{border:1px solid #ffffff20;background:#1b2a46;color:#fff;border-radius:12px;padding:16px;text-align:left;display:flex;width:100%;justify-content:space-between;margin-top:9px;align-items:center}.toggle span{color:#9bb0cd}.toggle .switch{width:36px;height:20px;border-radius:20px;background:#41506a;position:relative}.toggle .switch:after{content:"";position:absolute;background:white;border-radius:50%;width:14px;height:14px;left:3px;top:3px}.toggle.on .switch{background:#6478ef}.toggle.on .switch:after{left:19px}.footer{font-size:11px;color:#8194b4;margin-top:25px}.overlay{position:fixed;inset:0;z-index:20;background:#020712cb;display:flex;align-items:center;justify-content:center;padding:22px}.overlay.hidden{display:none}.dialog{position:relative;background:linear-gradient(145deg,#1b2d4f,#0c182f);border:1px solid #6775a34d;box-shadow:0 22px 95px #000d;border-radius:20px;padding:29px;max-width:540px;width:100%}.dialog h2{margin:0 35px 12px 0}.dialog p{color:#bac9df;font-size:14px;line-height:1.65}.close{position:absolute;right:14px;top:12px;border:0;border-radius:9px;background:#ffffff16;color:white;padding:8px 11px}.textinput{width:100%;background:#0b1830;color:white;border:1px solid #68759a;border-radius:10px;padding:14px}.result{display:block;background:#1a2b4b;border:1px solid #ffffff20;color:white;text-align:left;width:100%;padding:12px;margin-top:7px;border-radius:9px}.status{font-size:12px;color:#a8b5d1}.bottomhint{position:fixed;bottom:9px;right:23px;font-size:10px;color:#a2b2ce;background:#071126bf;padding:8px 13px;border-radius:20px;z-index:4}button:focus-visible,button.focused{outline:3px solid var(--accent);outline-offset:3px;box-shadow:0 0 25px #7970ff65;z-index:3}button{transition:transform .14s,border-color .14s}body[data-theme=aurora]{--hero-a:#083e4d;--hero-b:#19816e}body[data-theme=midnight]{--hero-a:#0a1128;--hero-b:#233456}body[data-theme=dawn]{--hero-a:#69324d;--hero-b:#ce8c76}
-@media(max-width:1150px){.sidebar{width:145px}.main{margin-left:145px;width:calc(100% - 145px);padding:23px}.apps{grid-template-columns:repeat(4,minmax(90px,1fr))}.posters{grid-template-columns:repeat(3,1fr)}.sidebar .nav{font-size:12px;gap:5px}.hero{min-height:330px}.hero:before{right:-80px}}@media(max-width:680px){.sidebar{width:64px;padding:15px 7px}.brand{font-size:0;margin:0 3px 40px}.brand .mark{font-size:23px}.category,.sideend,.nav .caption{display:none}.nav{justify-content:center}.main{margin-left:64px;width:calc(100% - 64px);padding:15px}.topbar{margin-bottom:10px}.eyebrow{font-size:8px}.topactions .status{display:none}.hero{min-height:295px}.hero .copy{padding:35px 20px}.hero:before{width:280px;height:280px;top:-90px;right:-135px}.hero h1{font-size:42px;letter-spacing:9px}.hero h1 small{font-size:10px;letter-spacing:5px}.hero p{max-width:240px}.apps{grid-template-columns:repeat(2,1fr)}.posters{grid-template-columns:repeat(2,1fr)}.devices,.gridtwo{grid-template-columns:1fr}.bottomhint{display:none}}
-
-/* FLOW TV 0.4 — Otimização real para TVs Full HD/4K: tipografia, foco e cards */
-@media (min-width: 1200px) {
-  .sidebar{width:270px;padding:36px 20px}
-  .brand{font-size:32px;margin:0 10px 42px}
-  .brand .mark{width:52px;height:52px;font-size:35px}
-  .category{font-size:15px;letter-spacing:2.2px;margin:0 16px 12px}
-  .nav{font-size:22px;padding:18px 15px;min-height:68px;gap:18px;margin:2px 0}
-  .nav .symbol{font-size:27px;width:32px}
-  .sideend{font-size:16px}
-  .main{margin-left:270px;width:calc(100% - 270px);padding:32px 44px 90px;max-width:none}
-  .topbar{margin-bottom:24px}.eyebrow{font-size:15px;letter-spacing:1.5px}
-  .topactions{font-size:19px;gap:22px}.status{font-size:17px}
-  .round,.avatar{height:53px;width:53px;font-size:21px}
-  .hero{min-height:445px}.hero .copy{padding:48px 45px;max-width:770px}
-  .hero h1{font-size:86px}.hero h1 small{font-size:22px}
-  .kicker{font-size:16px;letter-spacing:2px}
-  .hero p{font-size:20px;line-height:1.48;max-width:590px}
-  .chips{gap:12px;margin:21px 0}.chip{font-size:16px;padding:9px 15px}
-  .primary,.secondary{font-size:20px;padding:18px 26px;border-radius:13px;min-height:60px}
-  .sectionhead{margin:35px 0 17px}.sectionhead h2{font-size:29px}
-  .sectionhead p,.pageintro p{font-size:19px;line-height:1.5}
-  .link{font-size:20px;padding:12px 16px}
-  .apps{grid-template-columns:repeat(6,minmax(140px,1fr));gap:15px}
-  .tile{min-height:110px;font-size:25px;border-radius:17px}
-  .tile.youtube,.tile.prime,.tile.spotify{font-size:22px}.tile.max{font-size:29px}
-  .posters{display:flex;overflow-x:auto;overflow-y:hidden;gap:18px;padding:8px 5px 17px;scroll-behavior:smooth;scroll-snap-type:x proximity}
-  .poster{flex:0 0 clamp(250px,23%,350px);min-width:250px;min-height:264px;scroll-snap-align:start;border-radius:16px}
-  .poster .art{height:207px;font-size:25px;padding:22px;line-height:1.2}
-  .poster small{font-size:17px;padding:15px 17px}
-  .devices{grid-template-columns:repeat(4,minmax(180px,1fr));gap:16px}
-  .device{font-size:22px;min-height:115px;padding:20px}.device span{font-size:31px}.device small{font-size:16px}
-  .pageintro{margin:36px 0 30px}.pageintro h1{font-size:49px}
-  .group{padding:28px;margin-bottom:23px}.group h2{font-size:26px}.group p{font-size:20px}
-  .theme,.profile{font-size:20px;min-width:130px;padding:20px}
-  .theme .sample{width:115px;height:78px}.color{height:44px;width:44px}
-  .toggle{font-size:20px;min-height:73px;padding:19px}
-  .footer{font-size:16px}
-  .dialog{max-width:770px;padding:40px}.dialog h2{font-size:32px}
-  .dialog p{font-size:22px}.close{font-size:23px;padding:13px 19px}
-  .textinput{font-size:23px;padding:19px}.result{font-size:21px;padding:19px}
-  .bottomhint{font-size:15px;padding:13px 18px;bottom:16px;right:24px}
+:root {--text:#fafcff;--muted:#b0b8c7;--blue:#85abff;--accent:#85abff;--line:rgba(255,255,255,.09);--panel:#171e28;--bg:#060b12}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:"Segoe UI",Arial,Helvetica,sans-serif;font-size:20px}
+body{overflow-x:hidden}
+button,input{font:inherit}button{color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+button:focus{outline:3px solid #e0e9ff;outline-offset:3px;box-shadow:0 0 0 7px rgba(117,158,255,.28),0 0 25px rgba(106,154,255,.4);z-index:3}
+button:focus:not(:focus-visible){outline:3px solid #e0e9ff}
+button:hover{filter:brightness(1.08)}
+button:active{transform:scale(.985)}
+.shell{min-height:100vh;display:flex;background:radial-gradient(ellipse at 75% -15%,#283448 0,transparent 49%),var(--bg)}
+.sidebar{width:248px;min-width:248px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;background:linear-gradient(180deg,#070d15,#0a111c);border-right:1px solid var(--line);padding:34px 17px 26px}
+.brand{display:flex;align-items:center;gap:13px;padding:1px 15px 45px;font-size:34px;font-weight:700;letter-spacing:-1.7px;white-space:nowrap}
+.mark{display:grid;place-items:center;width:46px;height:46px;border-radius:14px;font-weight:800;color:#fff;background:linear-gradient(145deg,#369cff,#6457ef);box-shadow:0 7px 26px #274acd32}
+.brand .thin{font-weight:350;color:#c1cbd9}
+.nav{display:flex;align-items:center;gap:17px;width:100%;padding:17px 16px;margin:5px 0;border:1px solid transparent;border-radius:15px;background:transparent;color:#b7c2d2;text-align:left;font-size:22px;min-height:62px}
+.nav .symbol{width:27px;display:inline-grid;place-items:center;font-size:26px}
+.nav.active{background:rgba(255,255,255,.12);border-color:#ffffff18;color:#fff;font-weight:650}
+.nav:hover{background:rgba(255,255,255,.10)}
+.sidebarfoot{margin-top:auto;color:#8596aa;font-size:15px;display:flex;align-items:center;gap:10px;padding:0 15px}
+.sidebarfoot .dot{width:8px;height:8px;border-radius:100%;background:#68d3af}
+.main{width:calc(100% - 248px);min-width:0;padding:30px 38px 24px;max-width:2200px;margin:0 auto}
+.topbar{height:56px;display:flex;align-items:center;justify-content:flex-end;gap:16px;margin-bottom:19px}
+.circle{width:49px;height:49px;display:grid;place-items:center;font-size:24px;border:1px solid #ffffff24;background:rgba(255,255,255,.09);border-radius:100%}
+.avatar{background:linear-gradient(145deg,#304464,#514274);font-weight:750;font-size:22px}
+.timepill{border:1px solid #ffffff24;border-radius:30px;background:#ffffff19;padding:9px 17px;min-width:94px;text-align:center;font-variant-numeric:tabular-nums;font-size:23px;font-weight:650}
+.timepill small{display:block;font-size:12px;line-height:1.2;color:#ccd2df;font-weight:400}
+.page{display:none}.page.active{display:block}
+.hero{min-height:365px;position:relative;overflow:hidden;border:1px solid #ffffff14;border-radius:24px;background-color:#172538;background-image:linear-gradient(90deg,rgba(2,10,20,.57) 0%,rgba(4,13,27,.26) 45%,transparent 76%),url("assets/landscape.svg");background-repeat:no-repeat;background-size:cover;background-position:center;box-shadow:0 15px 54px #0005;display:flex;align-items:center}
+.hero.simple{background-image:radial-gradient(circle at 78% 30%,#3b4b78,transparent 36%),linear-gradient(135deg,#0d1a2c,#1f3044 53%,#141c2e)}
+.hero-inner{position:relative;z-index:1;padding:30px 44px;max-width:760px}
+.hero h1{font-size:clamp(47px,4.0vw,72px);line-height:1.06;letter-spacing:-2.6px;margin:0 0 20px;font-weight:760;text-shadow:0 5px 25px #0005}
+.hero p{font-size:24px;line-height:1.42;color:#d3dbea;max-width:600px;margin:0}
+.sectiontitle{display:flex;align-items:center;justify-content:space-between;margin:29px 2px 15px;gap:14px}
+.sectiontitle h2{font-size:26px;font-weight:650;letter-spacing:-.5px;margin:0}
+.sectiontitle .minor{background:none;border:0;color:#bacbe7;font-size:17px;padding:8px 12px}
+.apps,.inputs{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:13px}
+.app{min-width:0;height:133px;background:#151d28;border:1px solid #ffffff13;border-radius:17px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:13px;font-size:16px;color:#e5e9ef;overflow:hidden;padding:11px;transition:background .15s,transform .15s}
+.app .logotype{font-size:24px;font-weight:800;white-space:nowrap;line-height:1.1;letter-spacing:-1px}
+.app .logotype.netflix{font-size:58px;color:#e50914;font-family:Arial,sans-serif;letter-spacing:-7px}
+.app .logotype.youtube{display:flex;align-items:center;gap:9px;font-size:25px;color:#fff;letter-spacing:-1.2px}
+.app .logotype.youtube span{display:inline-grid;place-items:center;border-radius:10px;width:47px;height:33px;color:white;background:#f20a22;font-size:22px;letter-spacing:0}
+.app .logotype.prime{color:#a2d9ff;font-size:26px}
+.app .logotype.disney{font-style:italic;font-size:26px;font-weight:500;letter-spacing:-2px}
+.app .logotype.max{color:white;font-size:40px;letter-spacing:-2px}
+.app .logotype.spotify{color:#31d477;font-size:33px}
+.app .logotype.more{font-size:34px;font-weight:400;color:#dce7fa}
+.app.netflix-card{background:linear-gradient(140deg,#0a111c,#111924)}
+.app.youtube-card{background:linear-gradient(145deg,#252832,#12151d)}
+.app.prime-card{background:linear-gradient(120deg,#0678ee,#06419f)}
+.app.disney-card{background:linear-gradient(140deg,#071b39,#09376e)}
+.app.max-card{background:linear-gradient(140deg,#231ac3,#092e86)}
+.app.spotify-card{background:linear-gradient(140deg,#121e24,#10171d)}
+.app.more-card{background:#202630}
+.inputs{grid-template-columns:repeat(6,minmax(0,1fr))}
+.input-tile{height:120px;border:1px solid #ffffff15;border-radius:17px;background:linear-gradient(155deg,#252d38,#1a202a);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:13px;color:#dee4ed;font-size:18px}
+.input-tile .glyph{font-size:32px;color:#d1e0f7;line-height:1}
+.app:hover,.input-tile:hover{background-color:#303b4c}
+.intro{margin:18px 0 28px}.intro h1{font-size:46px;letter-spacing:-1.8px;margin:0 0 8px}.intro p{margin:0;color:#aebdce;font-size:22px;line-height:1.45}
+.catalog{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:18px}
+.catalog .app{height:170px;font-size:19px}
+.catalog .app .logotype{transform:scale(1.06)}
+.catalog .input-tile{height:164px}
+.group{margin:16px 0;padding:25px;border-radius:19px;background:linear-gradient(135deg,#141d2c,#101720);border:1px solid #ffffff15}
+.group h2{margin:0 0 18px;font-size:25px}.group p{font-size:19px;line-height:1.6;color:#adb9cc;margin:0 0 20px}
+.pill{border:1px solid #ffffff30;background:#232c3d;border-radius:14px;padding:17px 21px;min-height:60px;font-size:19px;margin:6px 11px 6px 0}
+.pill.selected{border-color:var(--accent);box-shadow:inset 0 0 0 2px var(--accent)}
+.settingsrow{display:flex;align-items:center;gap:15px;flex-wrap:wrap}
+.switch{display:inline-block;background:#52647d;border-radius:20px;width:48px;height:27px;position:relative;vertical-align:middle;margin-left:13px}
+.switch:after{content:"";position:absolute;top:4px;left:5px;width:19px;height:19px;border-radius:100%;background:#fff;transition:left .15s}
+.on .switch{background:#5a80ed}.on .switch:after{left:24px}
+.footer{margin-top:30px;color:#8190a6;font-size:14px;display:flex;justify-content:space-between;gap:14px}
+.overlay{display:none;position:fixed;z-index:99;inset:0;padding:30px;background:rgba(2,6,13,.82);align-items:center;justify-content:center}
+.overlay.open{display:flex}
+.dialog{width:min(750px,95%);border:1px solid #ffffff28;border-radius:23px;background:#172337;box-shadow:0 25px 90px #000a;padding:38px;position:relative}
+.dialog h2{font-size:32px;margin:0 46px 18px 0}
+.dialog p{font-size:21px;color:#c6d0e1;line-height:1.54}
+.dialog .close{position:absolute;top:18px;right:18px;border-radius:11px;background:#ffffff1b;border:1px solid #ffffff25;color:white;width:43px;height:43px;font-size:23px}
+.dialog input{display:block;width:100%;background:#111a2b;border:1px solid #8090ac;border-radius:13px;color:white;padding:18px;margin-bottom:18px}
+.results{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.results button{background:#2c3a55;border:1px solid #ffffff20;border-radius:12px;padding:15px;text-align:left}
+.errorline{font-size:17px!important;color:#ffcdcd!important}
+@media(max-width:1600px){
+.sidebar{width:218px;min-width:218px;padding:25px 13px}
+.brand{font-size:30px;padding:6px 14px 30px}.mark{width:42px;height:42px}
+.nav{font-size:20px;min-height:57px;padding:14px}.main{width:calc(100% - 218px);padding:24px}
+.hero{min-height:330px}.hero h1{font-size:56px}.hero p{font-size:21px}
+.app{height:117px}.app .logotype{font-size:21px}.app .logotype.netflix{font-size:51px}
+.app .logotype.youtube{font-size:21px}.app .logotype.disney{font-size:23px}
+.app .logotype.prime{font-size:21px}.app .logotype.spotify{font-size:28px}
+.input-tile{height:104px;font-size:16px}.input-tile .glyph{font-size:27px}
 }
-button:focus,button:focus-visible {outline:4px solid #aab8ff;outline-offset:4px;box-shadow:0 0 0 7px #5e78ec40,0 0 30px #5e78ec76}
-@media (prefers-reduced-motion: reduce){*,*:before,*:after{transition:none!important;scroll-behavior:auto!important}}
-
+@media(max-width:1080px){
+.sidebar{width:80px;min-width:80px;padding:18px 8px}
+.brand{padding:0 4px 26px;font-size:0}.brand .thin{display:none}
+.nav{justify-content:center;font-size:0;padding:12px 8px}.nav .symbol{font-size:28px}
+.sidebarfoot{display:none}.main{width:calc(100% - 80px);padding:20px}
+.apps{grid-template-columns:repeat(4,1fr)}.inputs{grid-template-columns:repeat(3,1fr)}
+.catalog{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:650px){.hero h1{font-size:42px}.hero p{font-size:18px}.hero{min-height:285px}.hero-inner{padding:28px}.apps{grid-template-columns:repeat(2,1fr)}.inputs{grid-template-columns:repeat(2,1fr)}.footer{display:block}.intro h1{font-size:35px}.catalog{grid-template-columns:repeat(2,1fr)}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
-<body data-theme="cosmic">
+<body>
 <div class="shell">
-<aside class="sidebar"><div class="brand"><span class="mark">f</span>flow<span class="light">tv</span></div><div class="category">EXPLORAR</div><nav id="nav"></nav><div class="sideend">SUA TV, DO SEU JEITO.<br>Sem publicidade.</div></aside>
-<main class="main"><header class="topbar"><div class="eyebrow">EXPERIÊNCIA PERSONALIZADA · FLOW TV ONLINE</div><div class="topactions"><span class="status" id="environment">Versão web</span><button class="round" id="search" aria-label="Buscar">⌕</button><span id="clock">--:--</span><button class="avatar" id="account">P</button></div></header>
-<section class="page active" id="page-home"><div class="hero"><div class="copy"><div class="kicker">UMA EXPERIÊNCIA CINEMATOGRÁFICA</div><h1>DUNE<small>PARTE DOIS</small></h1><p>Uma nova maneira de descobrir filmes, organizar seus aplicativos e aproveitar a sua televisão.</p><div class="chips"><span class="chip">Ficção científica</span><span class="chip">Aventura</span><span class="chip">2024</span></div><div class="actions"><button class="primary" data-title="Duna: Parte Dois">▶ Assistir / opções</button><button class="secondary" data-title="Duna: Parte Dois">Detalhes ↗</button></div></div></div><div class="sectionhead"><div><h2>Seus aplicativos</h2><p>Entretenimento sem anúncios</p></div><button class="link" data-page="apps">Ver todos →</button></div><div class="apps" id="home-apps"></div><div class="sectionhead"><div><h2>Descubra algo para assistir</h2><p>Catálogo ilustrativo · escolha um título para ver detalhes</p></div><span class="status">◀ ▶ OK</span></div><div class="posters" id="home-posters"></div><div class="sectionhead"><div><h2>Acesso rápido</h2></div></div><div class="devices" id="home-devices"></div></section>
-<section class="page" id="page-apps"><div class="pageintro"><span class="kicker">CENTRAL DE ENTRETENIMENTO</span><h1>Apps & dispositivos</h1><p>Organize suas experiências em um só lugar.</p></div><div class="sectionhead"><h2>Streaming e música</h2></div><div class="apps" id="all-apps"></div><div class="sectionhead"><h2>Entradas e dispositivos</h2></div><div class="devices" id="app-devices"></div></section>
-<section class="page" id="page-movies"><div class="pageintro"><span class="kicker">FLOW CINEMA</span><h1>Filmes</h1><p>Conheça títulos, escolha seus favoritos e abra seus serviços de streaming.</p></div><div class="posters" id="movies"></div></section>
-<section class="page" id="page-shows"><div class="pageintro"><span class="kicker">FLOW SERIES</span><h1>Séries & documentários</h1><p>Descubra uma nova história para assistir.</p></div><div class="posters" id="shows"></div></section>
-<section class="page" id="page-games"><div class="pageintro"><span class="kicker">FLOW PLAY</span><h1>Hora de jogar.</h1><p>Atalhos para consoles e serviços de jogos.</p></div><div class="devices" id="games-devices"></div><div class="sectionhead"><h2>Cloud Gaming</h2></div><div class="apps" id="game-apps"></div></section>
-<section class="page" id="page-inputs"><div class="pageintro"><span class="kicker">FLOW CONNECT</span><h1>Entradas & dispositivos</h1><p>As entradas HDMI ainda dependem de integração nativa com a sua LG.</p></div><div class="devices" id="inputs-devices"></div></section>
-<section class="page" id="page-settings"><div class="pageintro"><span class="kicker">PERSONALIZAÇÃO</span><h1>A televisão é sua.</h1><p>Altere aparência e organização. Suas escolhas ficam salvas neste dispositivo.</p></div><div class="gridtwo"><div><div class="group"><h2>Quem está assistindo?</h2><div class="profiles" id="profiles"></div></div><div class="group"><h2>Temas da interface</h2><div class="themegrid" id="themes"></div></div><div class="group"><h2>Cor de destaque</h2><div class="swatches" id="colors"></div></div></div><div><div class="group"><h2>Experiência</h2><div id="toggles"></div></div><div class="group"><h2>Integração com a LG</h2><p>Aplicativos nativos precisam de acesso à API do webOS. Netflix e YouTube podem ser testados aqui; o diagnóstico mostra se a TV permite as chamadas.</p><button class="secondary" id="diagnostic">Diagnóstico do controle →</button></div><div class="group"><h2>Atualizações online</h2><p>A interface será atualizada ao carregar a versão publicada no GitHub Pages. Alterações nativas poderão exigir um novo aplicativo .ipk.</p><p class="status">Flow TV Web · 0.4.0</p></div></div></div></section>
-<div class="footer">FLOW TV · Protótipo independente e não oficial · Sem publicidade · Os conteúdos demonstrados não representam integrações reais com os streamings.</div>
-</main></div><div class="bottomhint">◀ ▶ ▲ ▼ Navegar &nbsp; · &nbsp; OK selecionar &nbsp; · &nbsp; ↩ Voltar</div><div class="overlay hidden" id="overlay"><div class="dialog"><button class="close" id="close">✕</button><div id="dialogbody"></div></div></div>
+<aside class="sidebar" aria-label="Menu do Flow TV">
+ <div class="brand"><div class="mark">f</div><span>flow<span class="thin"> tv</span></span></div>
+ <nav id="nav" aria-label="Navegação principal"></nav>
+ <div class="sidebarfoot"><span class="dot"></span> Flow TV Online</div>
+</aside>
+<main class="main">
+ <header class="topbar">
+  <button class="circle" id="search" aria-label="Buscar aplicativos" title="Buscar">⌕</button>
+  <button class="circle avatar" id="account" aria-label="Perfil e ajustes" title="Perfil">P</button>
+  <div class="timepill"><span id="clock">--:--</span><small id="date">Flow TV</small></div>
+ </header>
+ <section class="page active" id="page-home">
+  <div class="hero" id="hero"><div class="hero-inner">
+   <h1>Seus apps,<br>do seu jeito.</h1>
+   <p>Acesse seus aplicativos e dispositivos de forma rápida e simples. Sem anúncios.</p>
+  </div></div>
+  <div class="sectiontitle"><h2>Seus apps</h2><button class="minor" data-page="apps">Ver todos ↗</button></div>
+  <div class="apps" id="home-apps"></div>
+  <div class="sectiontitle"><h2>Entradas</h2><button class="minor" data-page="inputs">Ver entradas ↗</button></div>
+  <div class="inputs" id="home-inputs"></div>
+ </section>
+ <section class="page" id="page-apps">
+  <div class="intro"><h1>Seus aplicativos</h1><p>Tudo o que você gosta, em um só lugar.</p></div>
+  <div class="catalog" id="all-apps"></div>
+  <div class="group"><h2>Sobre os atalhos</h2><p>O Flow TV tenta abrir os apps instalados usando a conexão com o webOS. A disponibilidade depende da sua TV e de cada serviço. Os botões mostram um erro claro quando não conseguem abrir.</p><button class="pill" data-action="diagnostic">Verificar conexão com LG</button></div>
+ </section>
+ <section class="page" id="page-inputs">
+  <div class="intro"><h1>Entradas</h1><p>Acesse suas conexões e dispositivos.</p></div>
+  <div class="catalog" id="all-inputs"></div>
+  <div class="group"><h2>Conectar à televisão</h2><p>Vamos tentar abrir o seletor original de entradas da LG. A troca direta para um HDMI específico ainda depende de recursos nativos do seu modelo.</p><button class="pill" data-action="open-inputs">Abrir entradas da LG</button></div>
+ </section>
+ <section class="page" id="page-settings">
+  <div class="intro"><h1>Ajustes</h1><p>Deixe a experiência com a sua cara.</p></div>
+  <div class="group">
+   <h2>Papel de parede</h2><p>Ative ou desative o cenário da tela inicial.</p>
+   <button class="pill" id="toggle-wallpaper">Paisagem <span class="switch"></span></button>
+  </div>
+  <div class="group">
+   <h2>Cor de destaque</h2>
+   <div class="settingsrow">
+    <button class="pill" data-accent="#85abff">Azul</button>
+    <button class="pill" data-accent="#c8a9ff">Lilás</button>
+    <button class="pill" data-accent="#9ce2c7">Verde</button>
+   </div>
+  </div>
+  <div class="group">
+   <h2>Diagnóstico LG</h2>
+   <p>Verifique a comunicação entre o site e o aplicativo instalado na televisão.</p>
+   <button class="pill" data-action="diagnostic">Testar integração</button>
+  </div>
+  <div class="group"><h2>Atualizações</h2><p>Flow TV v0.5.0 · Interface hospedada no GitHub Pages. Reabra o app para carregar uma versão publicada. Componentes nativos ainda exigem instalação de um novo IPK.</p></div>
+ </section>
+ <footer class="footer"><span>FLOW TV · Sua TV, seu espaço · Sem publicidade</span><span>↑ ↓ ← → Navegar · OK selecionar · Voltar</span></footer>
+</main>
+</div>
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="dialogtitle">
+ <div class="dialog">
+  <button id="close" class="close" aria-label="Fechar">×</button>
+  <h2 id="dialogtitle">Flow TV</h2>
+  <div id="dialogbody"></div>
+ </div>
+</div>
 <script>
 (function(){
 "use strict";
-var d=document,settings={theme:"cosmic",color:"#8b7dff",profile:"Principal",clock:true};
-try{var stored=JSON.parse(localStorage.getItem("flow-tv-settings")||"{}");for(var k in stored)if(stored.hasOwnProperty(k))settings[k]=stored[k];}catch(e){}
-function qs(x,r){return (r||d).querySelector(x);}function all(x,r){return Array.prototype.slice.call((r||d).querySelectorAll(x));}
-function save(){try{localStorage.setItem("flow-tv-settings",JSON.stringify(settings));}catch(e){}}
-function make(tag,text,cls){var x=d.createElement(tag);if(text!==undefined)x.textContent=text;if(cls)x.className=cls;return x;}
-var tabs=[["home","⌂","Início"],["movies","◉","Filmes"],["shows","▣","Séries"],["apps","▦","Aplicativos"],["games","♧","Jogos"],["inputs","⇥","Entradas"],["settings","⚙","Personalizar"]];
-var services=[["Netflix","netflix"],["YouTube","youtube"],["Prime Video","prime"],["Disney+","disney"],["Max","max"],["Spotify","spotify"]];
-var titles=[["Duna: Parte Dois","Filme","Max","#ae8159","#253964"],["Oppenheimer","Filme","Prime Video","#b07757","#302d39"],["The Last of Us","Série","Max","#6f8a72","#182b38"],["Shōgun","Série","Disney+","#8b7858","#343b38"],["Fallout","Série","Prime Video","#9c8a62","#323d4a"],["Monarch","Série","Apple TV","#436e90","#14263b"],["Blue Planet II","Documentário","Navegador","#2987a8","#071e56"]];
-var devices=["HDMI 1","HDMI 2","HDMI 3","HDMI 4"];
-function appTile(name,cls){var b=make("button",name,"tile "+cls);b.setAttribute("data-service",name);if(name==="YouTube")b.innerHTML="<i>▶</i> YouTube";return b;}
-function drawApps(id,names){var root=qs("#"+id);if(!root)return;root.innerHTML="";names.forEach(function(a){root.appendChild(appTile(a[0],a[1]));});}
-drawApps("home-apps",services);drawApps("all-apps",services.concat([["Xbox",""],["GeForce NOW",""],["Amazon Luna",""]]));drawApps("game-apps",[["Xbox",""],["GeForce NOW",""],["Amazon Luna",""]]);
-function poster(a){var b=make("button",undefined,"poster");b.setAttribute("data-title",a[0]);var art=make("span",a[0],"art");art.style.setProperty("--a",a[3]);art.style.setProperty("--b",a[4]);b.appendChild(art);b.appendChild(make("small",a[1]+" · "+a[2]));return b;}
-function drawPosters(id,filter){var root=qs("#"+id);if(!root)return;root.innerHTML="";titles.filter(filter).forEach(function(a){root.appendChild(poster(a));});}
-drawPosters("home-posters",function(){return true;});drawPosters("movies",function(a){return a[1]==="Filme";});drawPosters("shows",function(a){return a[1]!=="Filme";});
-function drawDevices(id,names){var root=qs("#"+id);if(!root)return;names.forEach(function(name){var b=make("button",undefined,"device");b.setAttribute("data-device",name);b.innerHTML='<span>▣</span><div>'+name+'<small>Selecionar entrada</small></div>';root.appendChild(b);});}
-["home-devices","app-devices","games-devices","inputs-devices"].forEach(function(id){drawDevices(id,devices.slice(0,id==="home-devices"?4:4));});
-var nav=qs("#nav");tabs.forEach(function(t){var b=make("button",undefined,"nav");b.setAttribute("data-page",t[0]);b.innerHTML='<span class="symbol">'+t[1]+'</span><span class="caption">'+t[2]+'</span>';nav.appendChild(b);});
-var current="home",previous=[];
-function show(id,history){if(!qs("#page-"+id))return;if(history&&id!==current)previous.push(current);current=id;all(".page").forEach(function(p){p.classList.toggle("active",p.id==="page-"+id);});all("#nav .nav").forEach(function(b){b.classList.toggle("active",b.getAttribute("data-page")===id);});window.scrollTo(0,0);var first=qs('#nav [data-page="'+id+'"]');if(first)first.focus();}
-function modal(content){qs("#dialogbody").innerHTML=content;qs("#overlay").classList.remove("hidden");qs("#close").focus();}
-function close(){qs("#overlay").classList.add("hidden");}
-
-/* Fluxo de integração nativa: sem simular sucesso quando o firmware não permite acesso. */
-var nativePending={}, nativeSequence=0;
+var d=document;
+var root="https://aton-citizen.github.io";
+var settings={accent:"#85abff",wallpaper:true};
+try{var saved=JSON.parse(localStorage.getItem("flow-tv-v05")||"{}");if(saved&&typeof saved==="object"){if(saved.accent)settings.accent=saved.accent;if(typeof saved.wallpaper==="boolean")settings.wallpaper=saved.wallpaper;}}catch(e){}
+var services=[
+{id:"netflix",label:"Netflix",style:"netflix",logo:"N"},
+{id:"youtube",label:"YouTube",style:"youtube",logo:"YouTube"},
+{id:"prime",label:"Prime Video",style:"prime",logo:"prime video"},
+{id:"disney",label:"Disney+",style:"disney",logo:"Disney+"},
+{id:"max",label:"Max",style:"max",logo:"max"},
+{id:"spotify",label:"Spotify",style:"spotify",logo:"● Spotify"}
+];
+var inputs=[
+{id:"live",label:"TV ao vivo",glyph:"▣"},
+{id:"hdmi1",label:"HDMI 1",glyph:"▱"},
+{id:"hdmi2",label:"HDMI 2",glyph:"▱"},
+{id:"hdmi3",label:"HDMI 3",glyph:"▱"},
+{id:"hdmi4",label:"HDMI 4",glyph:"▱"},
+{id:"sources",label:"Outras entradas",glyph:"•••"}
+];
+var tabs=[["home","⌂","Início"],["apps","▦","Apps"],["inputs","▣","Entradas"],["search","⌕","Buscar"],["settings","⚙","Ajustes"]];
+var current="home",previous=[],seq=0,pending={};
+function qs(s){return d.querySelector(s);}
+function all(s){return Array.prototype.slice.call(d.querySelectorAll(s));}
+function make(tag,cls,txt){var el=d.createElement(tag);if(cls)el.className=cls;if(txt!==undefined)el.textContent=txt;return el;}
+function escapeHtml(v){return String(v).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+function save(){try{localStorage.setItem("flow-tv-v05",JSON.stringify(settings));}catch(e){}}
+function applySettings(){
+ d.documentElement.style.setProperty("--accent",settings.accent);
+ qs("#hero").classList.toggle("simple",!settings.wallpaper);
+ qs("#toggle-wallpaper").classList.toggle("on",settings.wallpaper);
+ all("[data-accent]").forEach(function(b){b.classList.toggle("selected",b.getAttribute("data-accent")===settings.accent);});
+}
+function appTile(a){
+ var b=make("button","app "+a.style+"-card");
+ b.setAttribute("data-service",a.id);b.setAttribute("aria-label","Abrir "+a.label);
+ var logo=make("div","logotype "+a.style);
+ if(a.id==="youtube"){var red=make("span","","▶");logo.appendChild(red);logo.appendChild(d.createTextNode("YouTube"));}
+ else logo.textContent=a.logo;
+ b.appendChild(logo);b.appendChild(make("div","app-label",a.label));return b;
+}
+function inputTile(a){var b=make("button","input-tile");b.setAttribute("data-input",a.id);b.setAttribute("aria-label",a.label);b.appendChild(make("span","glyph",a.glyph));b.appendChild(make("span","",a.label));return b;}
+function render(){
+ var nav=qs("#nav");tabs.forEach(function(a){
+  var b=make("button","nav");b.setAttribute("data-page",a[0]);b.innerHTML='<span class="symbol">'+a[1]+'</span><span>'+a[2]+'</span>';nav.appendChild(b);
+ });
+ var home=qs("#home-apps"),apps=qs("#all-apps");services.forEach(function(a){home.appendChild(appTile(a));apps.appendChild(appTile(a));});
+ var more=make("button","app more-card");more.setAttribute("data-page","apps");more.innerHTML='<div class="logotype more">＋</div><div>Ver todos</div>';home.appendChild(more);
+ var first=qs("#home-inputs"),second=qs("#all-inputs");inputs.forEach(function(a){first.appendChild(inputTile(a));second.appendChild(inputTile(a));});
+}
+function show(page,track){
+ if(page==="search"){search();return;}
+ if(!qs("#page-"+page))return;
+ if(track && page!==current)previous.push(current);
+ current=page;all(".page").forEach(function(p){p.classList.toggle("active",p.id==="page-"+page);});
+ all(".nav").forEach(function(n){n.classList.toggle("active",n.getAttribute("data-page")===page);});
+ window.scrollTo(0,0);
+ var first=qs('#nav [data-page="'+page+'"]');if(first)first.focus();
+}
+function modal(title,html){qs("#dialogtitle").textContent=title;qs("#dialogbody").innerHTML=html;qs("#overlay").classList.add("open");qs("#close").focus();}
+function close(){qs("#overlay").classList.remove("open");var b=qs('#nav [data-page="'+current+'"]');if(b)b.focus();}
+function clock(){
+ var now=new Date();qs("#clock").textContent=now.toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});
+ qs("#date").textContent=now.toLocaleDateString("pt-BR",{day:"2-digit",month:"short"});
+}
+function availableDirect(){
+ return (window.webOS&&window.webOS.service&&typeof window.webOS.service.request==="function")||typeof window.PalmServiceBridge==="function";
+}
+function nativeRequest(method,params,callback){
+ var id="flow"+(++seq),called=false;
+ function done(data){if(called)return;called=true;delete pending[id];callback(data||{returnValue:false,errorText:"Resposta vazia"});}
+ pending[id]=done;
+ if(window.parent!==window){
+  try{window.parent.postMessage({flowTV:"bridge-request",requestId:id,method:method,parameters:params||{}},"*");}
+  catch(e){done({returnValue:false,errorText:e.message});}
+  setTimeout(function(){done({returnValue:false,errorText:"Sem resposta da ponte LG após 12 segundos."});},12000);
+  return;
+ }
+ var uri="luna://com.webos.applicationManager";
+ if(availableDirect()){
+  if(window.webOS&&window.webOS.service&&typeof window.webOS.service.request==="function"){
+   try{window.webOS.service.request(uri,{method:method,parameters:params||{},onSuccess:done,onFailure:done});}
+   catch(e){done({returnValue:false,errorText:e.message});}
+  }else{
+   try{var bridge=new window.PalmServiceBridge();bridge.onservicecallback=function(raw){try{done(JSON.parse(raw));}catch(e){done({returnValue:false,errorText:"Resposta inválida"});}};bridge.call(uri+"/"+method,JSON.stringify(params||{}));}
+   catch(e){done({returnValue:false,errorText:e.message});}
+  }
+  setTimeout(function(){done({returnValue:false,errorText:"Tempo limite de resposta."});},12000);return;
+ }
+ done({returnValue:false,errorText:"A API da LG não está disponível no navegador. Abra o Flow TV instalado na TV."});
+}
+function statusError(title,response){
+ var error=response&&(response.errorText||response.errorMessage||response.errorCode);
+ modal(title,'<p>O webOS não conseguiu executar essa ação neste aparelho.</p><p class="errorline">'+escapeHtml(error||"Aplicativo não disponível ou permissão negada.")+'</p><p>Você ainda pode abrir o aplicativo diretamente pelo menu Home da LG.</p>');
+}
+function openService(key){
+ var app=services.filter(function(a){return a.id===key;})[0];
+ if(!app)return;
+ modal("Abrindo "+app.label,'<p>Solicitando a abertura do aplicativo à LG...</p>');
+ nativeRequest("launchService",{service:key},function(r){if(r&&r.returnValue===true){close();return;}statusError("Não foi possível abrir "+app.label,r);});
+}
+function openInput(key){
+ if(key==="sources"||key==="live"||key.indexOf("hdmi")===0){
+  modal("Entradas da LG",'<p>Abrindo o seletor de entradas da televisão...</p>');
+  nativeRequest("openInputs",{input:key},function(r){if(r&&r.returnValue===true){close();return;}statusError("Selecione a entrada pelo controle LG",r);});
+ }
+}
+function diagnostics(){
+ modal("Conexão com a LG",'<p>Testando a comunicação com o aplicativo local...</p>');
+ nativeRequest("ping",{},function(r){
+  var ok=r&&r.returnValue===true;
+  modal(ok?"Ponte LG disponível":"Integração LG não disponível",
+   '<p>'+ (ok?"O site está conversando com o aplicativo instalado na televisão.":"O navegador não obteve resposta da ponte webOS.")+'</p>'+
+   '<p>'+escapeHtml((r&&(r.errorText||r.message))||"Isso não confirma que todos os aplicativos possam ser abertos; cada um depende do firmware.")+'</p>'+
+   '<button class="pill" data-service="youtube">Testar YouTube</button>');
+ });
+}
+function search(){
+ var opts=services.map(function(a){return '<button data-service="'+a.id+'">'+escapeHtml(a.label)+'</button>';}).join("");
+ modal("Buscar aplicativos",'<p>Busque entre seus atalhos configurados.</p><input type="search" id="find" placeholder="Ex.: YouTube, Netflix" autocomplete="off" aria-label="Pesquisar"><div class="results" id="results">'+opts+'</div>');
+ qs("#find").focus();
+}
+d.addEventListener("input",function(e){
+ if(e.target.id!=="find")return;
+ var text=e.target.value.toLowerCase();
+ all("#results button").forEach(function(b){b.style.display=b.textContent.toLowerCase().indexOf(text)>=0?"":"none";});
+});
+d.addEventListener("click",function(e){
+ var b=e.target.closest("button");if(!b)return;
+ if(b.id==="close"){close();return;}
+ if(b.hasAttribute("data-page")){show(b.getAttribute("data-page"),true);return;}
+ if(b.hasAttribute("data-service")){openService(b.getAttribute("data-service"));return;}
+ if(b.hasAttribute("data-input")){openInput(b.getAttribute("data-input"));return;}
+ if(b.hasAttribute("data-action")){var a=b.getAttribute("data-action");if(a==="diagnostic")diagnostics();else if(a==="open-inputs")openInput("sources");return;}
+ if(b.id==="search"){search();return;}
+ if(b.id==="account"){show("settings",true);return;}
+ if(b.id==="toggle-wallpaper"){settings.wallpaper=!settings.wallpaper;save();applySettings();return;}
+ if(b.hasAttribute("data-accent")){settings.accent=b.getAttribute("data-accent");save();applySettings();}
+});
 window.addEventListener("message",function(e){
-  var data=e.data;
-  if(!data || data.flowTV !== "bridge-result" || !data.requestId || e.source!==window.parent)return;
-  if(e.origin!=="https://aton-citizen.github.io" && e.origin!=="null")return;
-  var fn=nativePending[data.requestId];
-  if(!fn)return;
-  delete nativePending[data.requestId];
-  fn(data.result || {returnValue:false,errorText:"Ponte sem resposta"});
+ if(e.origin!==root || e.source!==window.parent)return;
+ var m=e.data;if(!m||m.flowTV!=="bridge-result"||!m.requestId)return;
+ if(pending[m.requestId])pending[m.requestId](m.result);
 });
-function hasNativeAccess(){
-  if(window.webOS && webOS.service && typeof webOS.service.request==="function")return "webOSTV.js";
-  if(typeof window.PalmServiceBridge==="function")return "PalmServiceBridge";
-  if(window.parent!==window)return "Ponte do aplicativo (a verificar)";
-  return "Indisponível na página hospedada";
+function focusables(){
+ var overlay=qs("#overlay"),open=overlay.classList.contains("open");
+ return all("button,input").filter(function(x){
+  if(x.disabled)return false;
+  var inDialog=!!x.closest("#overlay");
+  if(open!==inDialog)return false;
+  if(x.style.display==="none")return false;
+  var page=x.closest(".page");if(page&&!page.classList.contains("active"))return false;
+  var r=x.getBoundingClientRect();return r.width>0&&r.height>0;
+ });
 }
-function callWebOS(method,parameters,callback){
-  var uri="luna://com.webos.applicationManager/";
-  var completed=false;
-  function done(data){if(completed)return;completed=true;callback(data || {returnValue:false,errorText:"Sem resposta"});}
-  if(window.webOS && webOS.service && typeof webOS.service.request==="function"){
-    try {
-      webOS.service.request(uri,{
-        method:method,parameters:parameters,
-        onSuccess:done,onFailure:done
-      });
-      setTimeout(function(){done({returnValue:false,errorText:"Sem resposta do webOS (10 s)"});},10000);
-      return;
-    }catch(ex){done({returnValue:false,errorText:ex.message});return;}
-  }
-  if(typeof window.PalmServiceBridge==="function"){
-    try{
-      var bridge=new window.PalmServiceBridge();
-      bridge.onservicecallback=function(resp){try{done(JSON.parse(resp));}catch(err){done({returnValue:false,errorText:"Resposta inválida"});}};
-      bridge.call(uri+method,JSON.stringify(parameters));
-      setTimeout(function(){done({returnValue:false,errorText:"Sem resposta do webOS (10 s)"});},10000);
-      return;
-    }catch(ex){done({returnValue:false,errorText:ex.message});return;}
-  }
-  if(window.parent!==window){
-    var id="req_"+(++nativeSequence);
-    nativePending[id]=done;
-    window.parent.postMessage({flowTV:"bridge-request",requestId:id,method:method,parameters:parameters},"*");
-    setTimeout(function(){if(nativePending[id]){delete nativePending[id];done({returnValue:false,errorText:"A ponte nativa não respondeu (10 s)"})}},10000);
-    return;
-  }
-  done({returnValue:false,errorText:"A página hospedada não recebeu acesso à API webOS. É necessária uma ponte nativa no aplicativo LG."});
+function move(code){
+ var arr=focusables(),cur=d.activeElement;
+ if(arr.indexOf(cur)<0){if(arr.length)arr[0].focus();return;}
+ var ar=cur.getBoundingClientRect(),cx=ar.left+ar.width/2,cy=ar.top+ar.height/2,best=null,bs=1e9;
+ arr.forEach(function(b){
+  if(b===cur)return;var r=b.getBoundingClientRect(),dx=r.left+r.width/2-cx,dy=r.top+r.height/2-cy;
+  if(code===37&&dx>=-8)return;if(code===39&&dx<=8)return;
+  if(code===38&&dy>=-8)return;if(code===40&&dy<=8)return;
+  var main=(code===37||code===39)?Math.abs(dx):Math.abs(dy),side=(code===37||code===39)?Math.abs(dy):Math.abs(dx);
+  var score=main+side*2.8;if(score<bs){bs=score;best=b;}
+ });
+ if(best){best.focus();try{best.scrollIntoView({block:"nearest",inline:"nearest"});}catch(e){}}
 }
-var appIds={
-  "Netflix":"netflix",
-  "YouTube":"youtube.leanback.v4",
-  "Prime Video":"amazon",
-  "Spotify":"spotify-beehive"
-};
-function launchStreaming(name){
-  var id=appIds[name] || (settings.appIds && settings.appIds[name]);
-  if(!id){
-    modal('<h2>'+name+'</h2><p>Este streaming ainda não tem identificador confirmado neste modelo LG. Primeiro vamos testar Netflix e YouTube.</p><p>Integração webOS: '+hasNativeAccess()+'.</p>');
-    return;
-  }
-  modal('<h2>Abrindo '+name+'…</h2><p>Enviando solicitação ao webOS. Aguarde alguns segundos.</p>');
-  callWebOS("launch",{id:id},function(r){
-    if(r.returnValue===true){close();return;}
-    var msg=String(r.errorText||r.errorMessage||r.errorCode||"O webOS recusou a solicitação");
-    modal('<h2>Não foi possível abrir '+name+'</h2><p>'+escapeHTML(msg)+'</p><p><strong>Integração:</strong> '+escapeHTML(hasNativeAccess())+'</p><p>Não é uma falha do botão. Precisamos autorizar uma ponte nativa ou confirmar o ID do aplicativo neste modelo.</p><button class="secondary" id="diagnoseNative">Ver diagnóstico webOS</button>');
-  });
-}
-function escapeHTML(s){return String(s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
-function nativeDiagnostics(){
-  var channel=hasNativeAccess();
-  modal('<h2>Diagnóstico de integração LG</h2><p><strong>Canal nativo:</strong> '+escapeHTML(channel)+'</p><p><strong>Execução:</strong> '+(window.parent!==window?'Flow TV incorporado':'Página principal hospedada')+'</p><p>Toque em Testar Netflix. Se o canal estiver indisponível, uma atualização do aplicativo local será necessária para usar uma ponte com a TV.</p><button class="primary" data-service="Netflix">Testar Netflix</button><button class="secondary" data-service="YouTube">Testar YouTube</button>');
-}
-
-function explainApp(name){launchStreaming(name);}
-function detail(title){var t=titles.filter(function(a){return a[0]===title;})[0];if(!t)return;modal('<div class="kicker">DETALHES · '+t[1]+'</div><h2>'+title+'</h2><p>Este título faz parte do catálogo ilustrativo do Flow TV. Serviço associado: '+t[2]+'.</p><button class="primary" data-service="'+t[2]+'">Ver opções de '+t[2]+'</button>');}
-function drawSettings(){d.body.setAttribute("data-theme",settings.theme);d.documentElement.style.setProperty("--accent",settings.color);qs("#clock").style.display=settings.clock?"":"none";qs("#account").textContent=settings.profile.charAt(0);
-var profiles=qs("#profiles");profiles.innerHTML="";["Principal","Convidado","Família"].forEach(function(x){var b=make("button",x,"profile"+(settings.profile===x?" active":""));b.setAttribute("data-profile",x);profiles.appendChild(b);});
-var themes=qs("#themes");themes.innerHTML="";[["cosmic","Cósmico"],["aurora","Aurora"],["midnight","Meia-noite"],["dawn","Amanhecer"]].forEach(function(t){var b=make("button",undefined,"theme"+(settings.theme===t[0]?" active":""));b.setAttribute("data-theme-select",t[0]);b.innerHTML='<span class="sample"></span>'+t[1];themes.appendChild(b);});
-var colors=qs("#colors");colors.innerHTML="";["#8b7dff","#4daafa","#26d4b0","#efa75b","#fc6895"].forEach(function(c){var b=make("button",undefined,"color"+(settings.color===c?" active":""));b.setAttribute("data-color",c);b.style.setProperty("--c",c);b.setAttribute("aria-label","Alterar cor");colors.appendChild(b);});
-qs("#toggles").innerHTML='<button class="toggle '+(settings.clock?"on":"")+'" data-toggle="clock">Relógio no cabeçalho <i class="switch"></i></button>';
-}
-drawSettings();
-qs("#environment").textContent="Flow TV 0.4 · "+(typeof window.PalmServiceBridge==="function"?"LG nativo":"Online");
-function tick(){try{qs("#clock").textContent=new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});}catch(e){qs("#clock").textContent="";}}tick();setInterval(tick,30000);
-d.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;
-if(b.id==="close"||b.id==="understood"){close();return;}
-if(b.hasAttribute("data-page")){show(b.getAttribute("data-page"),true);return;}
-if(b.hasAttribute("data-title")){detail(b.getAttribute("data-title"));return;}
-if(b.hasAttribute("data-service")){explainApp(b.getAttribute("data-service"));return;}
-if(b.hasAttribute("data-device")){modal('<h2>'+b.getAttribute("data-device")+'</h2><p>Este botão já é interativo. A troca real de entrada será habilitada após os testes das permissões do seu modelo LG.</p>');return;}
-if(b.hasAttribute("data-profile")){settings.profile=b.getAttribute("data-profile");save();drawSettings();return;}
-if(b.hasAttribute("data-theme-select")){settings.theme=b.getAttribute("data-theme-select");save();drawSettings();return;}
-if(b.hasAttribute("data-color")){settings.color=b.getAttribute("data-color");save();drawSettings();return;}
-if(b.hasAttribute("data-toggle")){settings.clock=!settings.clock;save();drawSettings();return;}
-if(b.id==="account"){show("settings",true);return;}
-if(b.id==="search"){modal('<h2>Buscar no Flow TV</h2><p>Encontre títulos e aplicativos demonstrativos.</p><input class="textinput" id="searchtext" placeholder="Digite sua busca…" autocomplete="off"><div id="results"></div>');qs("#searchtext").focus();return;}
-if(b.id==="diagnoseNative"){nativeDiagnostics();return;}
-if(b.id==="diagnostic"){nativeDiagnostics();return;}
-if(b.id==="diagnosticOld"){modal('<h2>Diagnóstico do controle</h2><p>Aperte qualquer seta, OK ou Voltar no Magic Remote. Último botão: <strong id="lastkey">Aguardando…</strong></p>');return;}
+d.addEventListener("keydown",function(e){
+ var k=e.keyCode||e.which;
+ if(e.target.tagName==="INPUT"&&k!==27&&k!==461)return;
+ if(k===37||k===38||k===39||k===40){e.preventDefault();move(k);return;}
+ if(k===13&&e.target.tagName!=="INPUT"&&d.activeElement&&d.activeElement.click){e.preventDefault();d.activeElement.click();return;}
+ if(k===27||k===461||k===8){e.preventDefault();if(qs("#overlay").classList.contains("open"))close();else if(previous.length)show(previous.pop(),false);else show("home",false);}
 });
-d.addEventListener("input",function(e){if(e.target.id!=="searchtext")return;var q=e.target.value.toLowerCase(),results=qs("#results");results.innerHTML="";if(!q)return;var names=titles.map(function(a){return a[0];}).concat(services.map(function(a){return a[0];}));names.filter(function(x){return x.toLowerCase().indexOf(q)>=0;}).slice(0,8).forEach(function(x){var b=make("button",x,"result");b.setAttribute(titles.some(function(a){return a[0]===x;})?"data-title":"data-service",x);results.appendChild(b);});});
-function focusables(){return all("button,input").filter(function(b){var r=b.getBoundingClientRect();return r.width&&r.height&&!b.disabled&&(qs("#overlay").classList.contains("hidden")?!b.closest("#overlay"):!!b.closest("#overlay"));});}
-function spatial(code){var items=focusables(),a=d.activeElement;if(items.indexOf(a)<0){if(items[0])items[0].focus();return;}var ar=a.getBoundingClientRect(),x=ar.left+ar.width/2,y=ar.top+ar.height/2,best=null,score=1e9;items.forEach(function(n){if(n===a)return;var r=n.getBoundingClientRect(),xx=r.left+r.width/2,yy=r.top+r.height/2,dx=xx-x,dy=yy-y;if((code===37&&dx>=-8)||(code===39&&dx<=8)||(code===38&&dy>=-8)||(code===40&&dy<=8))return;var primary=(code===37||code===39)?Math.abs(dx):Math.abs(dy),secondary=(code===37||code===39)?Math.abs(dy):Math.abs(dx),s=primary+secondary*2.5;if(s<score){score=s;best=n;}});if(best){best.focus();try{best.scrollIntoView({block:"nearest",inline:"nearest"});}catch(e){}}}
-d.addEventListener("keydown",function(e){var code=e.keyCode||e.which;if(qs("#lastkey"))qs("#lastkey").textContent=e.key||String(code);if(e.target.tagName==="INPUT"&&code!==27&&code!==461)return;if([37,38,39,40].indexOf(code)>=0){e.preventDefault();spatial(code);}else if(code===13&&d.activeElement&&d.activeElement.click&&d.activeElement.tagName!=="INPUT"){e.preventDefault();d.activeElement.click();}else if(code===27||code===461||code===8){e.preventDefault();if(!qs("#overlay").classList.contains("hidden"))close();else if(previous.length)show(previous.pop(),false);else show("home",false);}});
-setTimeout(function(){var b=qs('#nav [data-page="home"]');if(b)b.focus();},150);
-try{if(window.parent!==window)window.parent.postMessage({flowTV:"bridge-ready"},"*");}catch(ex){}
+render();applySettings();clock();setInterval(clock,30000);
+all(".nav").forEach(function(b){b.classList.toggle("active",b.getAttribute("data-page")==="home");});
+setTimeout(function(){var b=qs('#home-apps [data-service="netflix"]');if(b)b.focus();},150);
+try{if(window.parent!==window)window.parent.postMessage({flowTV:"bridge-ready"},"*");}catch(e){}
 })();
 </script>
-</body></html>
+</body>
+</html>
