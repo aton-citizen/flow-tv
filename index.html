@@ -161,7 +161,7 @@ button:active{transform:scale(.985)}
    <p>Verifique a comunicação entre o site e o aplicativo instalado na televisão.</p>
    <button class="pill" data-action="diagnostic">Testar integração</button>
   </div>
-  <div class="group"><h2>Atualizações</h2><p>Flow TV v0.5.0 · Interface hospedada no GitHub Pages. Reabra o app para carregar uma versão publicada. Componentes nativos ainda exigem instalação de um novo IPK.</p></div>
+  <div class="group"><h2>Atualizações</h2><p>Flow TV Web v0.5.1 · Interface hospedada no GitHub Pages. Reabra o app para carregar uma versão publicada. Componentes nativos ainda exigem instalação de um novo IPK.</p></div>
  </section>
  <footer class="footer"><span>FLOW TV · Sua TV, seu espaço · Sem publicidade</span><span>↑ ↓ ← → Navegar · OK selecionar · Voltar</span></footer>
 </main>
@@ -275,21 +275,50 @@ function openService(key){
  var app=services.filter(function(a){return a.id===key;})[0];
  if(!app)return;
  modal("Abrindo "+app.label,'<p>Solicitando a abertura do aplicativo à LG...</p>');
- nativeRequest("launchService",{service:key},function(r){if(r&&r.returnValue===true){close();return;}statusError("Não foi possível abrir "+app.label,r);});
+ nativeRequest("launchService",{service:key},function(r){
+  if(r&&r.returnValue===true){close();return;}
+  // Compatibilidade com a ponte webOS 0.4 já instalada: a versão antiga aceita "launch" em vez de "launchService".
+  var msg=String((r&&(r.errorText||r.errorMessage))||"");
+  var legacyIds={netflix:"netflix",youtube:"youtube.leanback.v4",prime:"amazon",spotify:"spotify-beehive"};
+  if((msg.indexOf("Operação não permitida")>=0 || msg.indexOf("Operacao nao permitida")>=0) && legacyIds[key]){
+    nativeRequest("launch",{id:legacyIds[key]},function(v){
+      if(v&&v.returnValue===true){close();return;}
+      statusError("Não foi possível abrir "+app.label,v);
+    });
+    return;
+  }
+  if((msg.indexOf("Operação não permitida")>=0 || msg.indexOf("Operacao nao permitida")>=0) && !legacyIds[key]){
+    statusError("Integração ainda não disponível",{
+      errorText:"Esse atalho ainda não existe na ponte webOS instalada. O visual atualiza online; integração nativa de "+app.label+" requer suporte do firmware ou atualização específica."
+    });
+    return;
+  }
+  statusError("Não foi possível abrir "+app.label,r);
+ });
 }
 function openInput(key){
  if(key==="sources"||key==="live"||key.indexOf("hdmi")===0){
   modal("Entradas da LG",'<p>Abrindo o seletor de entradas da televisão...</p>');
-  nativeRequest("openInputs",{input:key},function(r){if(r&&r.returnValue===true){close();return;}statusError("Selecione a entrada pelo controle LG",r);});
+  nativeRequest("openInputs",{input:key},function(r){
+   if(r&&r.returnValue===true){close();return;}
+   var msg=String((r&&(r.errorText||r.errorMessage))||"");
+   if(msg.indexOf("Operação não permitida")>=0 || msg.indexOf("Operacao nao permitida")>=0){
+     statusError("Seletor de entradas da LG",{errorText:"A ponte webOS 0.4 não oferece controle de HDMI. Use o botão Entradas/Input no controle original. Isso não impede atualizações de visual online."});
+     return;
+   }
+   statusError("Selecione a entrada pelo controle LG",r);
+  });
  }
 }
 function diagnostics(){
  modal("Conexão com a LG",'<p>Testando a comunicação com o aplicativo local...</p>');
  nativeRequest("ping",{},function(r){
+  var msg=String((r&&(r.errorText||r.errorMessage))||"");
+  var legacy=msg.indexOf("Operação não permitida")>=0 || msg.indexOf("Operacao nao permitida")>=0;
   var ok=r&&r.returnValue===true;
-  modal(ok?"Ponte LG disponível":"Integração LG não disponível",
-   '<p>'+ (ok?"O site está conversando com o aplicativo instalado na televisão.":"O navegador não obteve resposta da ponte webOS.")+'</p>'+
-   '<p>'+escapeHtml((r&&(r.errorText||r.message))||"Isso não confirma que todos os aplicativos possam ser abertos; cada um depende do firmware.")+'</p>'+
+  modal(ok?"Ponte LG 0.5 disponível":(legacy?"Ponte LG 0.4 detectada":"Integração LG não disponível"),
+   '<p>'+ (ok?"A interface está conectada à ponte nativa da TV.":(legacy?"A TV respondeu com o protocolo anterior. Netflix, YouTube, Prime Video e Spotify serão testados em modo compatível.":"O site não recebeu uma resposta válida da ponte webOS."))+'</p>'+
+   '<p>'+escapeHtml((r&&(r.errorText||r.message))||"Abertura de apps depende das permissões e IDs disponíveis no seu modelo LG.")+'</p>'+
    '<button class="pill" data-service="youtube">Testar YouTube</button>');
  });
 }
@@ -316,7 +345,7 @@ d.addEventListener("click",function(e){
  if(b.hasAttribute("data-accent")){settings.accent=b.getAttribute("data-accent");save();applySettings();}
 });
 window.addEventListener("message",function(e){
- if(e.origin!==root || e.source!==window.parent)return;
+ if(e.source!==window.parent || window.parent===window)return; // app webOS e iframe têm origens diferentes
  var m=e.data;if(!m||m.flowTV!=="bridge-result"||!m.requestId)return;
  if(pending[m.requestId])pending[m.requestId](m.result);
 });
