@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - 'webos-bridge/**'
+      - 'index.html'
+      - 'assets/**'
       - '.github/workflows/build-webos.yml'
 permissions:
   contents: read
@@ -49,11 +51,11 @@ jobs:
           mkdir -p dist
           cd webos-bridge
           ares-package .
-          mv com.flowtv.launcher_0.4.0_all.ipk ../dist/
-          test -s ../dist/com.flowtv.launcher_0.4.0_all.ipk
+          mv com.flowtv.launcher_0.5.0_all.ipk ../dist/
+          test -s ../dist/com.flowtv.launcher_0.5.0_all.ipk
       - name: Disponibilizar instalador
         uses: actions/upload-artifact@v4
         with:
-          name: Flow-TV-LG-v0.4.0
+          name: Flow-TV-LG-v0.5.0
           path: dist/*.ipk
           retention-days: 30
