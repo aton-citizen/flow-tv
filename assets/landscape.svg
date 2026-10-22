@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 560" preserveAspectRatio="xMidYMid slice">
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#101f38"/><stop offset=".34" stop-color="#27364c"/><stop offset=".64" stop-color="#a56866"/><stop offset=".86" stop-color="#edaa6e"/><stop offset="1" stop-color="#ffcc8a"/></linearGradient>
+  <radialGradient id="shine" cx="82%" cy="37%" r="52%"><stop stop-color="#ffe5ad" stop-opacity=".65"/><stop offset=".65" stop-color="#efa06c" stop-opacity=".14"/><stop offset="1" stop-color="#a25872" stop-opacity="0"/></radialGradient>
+  <linearGradient id="lake" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#885b72"/><stop offset=".5" stop-color="#253d58"/><stop offset="1" stop-color="#0e2435"/></linearGradient>
+  <linearGradient id="mountain" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#24364c"/><stop offset="1" stop-color="#0c2333"/></linearGradient>
+  <linearGradient id="front" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#122a3b"/><stop offset="1" stop-color="#071520"/></linearGradient>
+  <linearGradient id="veil" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#06111d" stop-opacity=".88"/><stop offset=".4" stop-color="#091a29" stop-opacity=".45"/><stop offset=".76" stop-color="#0a1420" stop-opacity=".06"/><stop offset="1" stop-color="#142032" stop-opacity=".1"/></linearGradient>
+</defs>
+<rect width="1500" height="560" fill="url(#sky)"/>
+<rect width="1500" height="560" fill="url(#shine)"/>
+<path fill="#344154" opacity=".25" d="M0 102 Q150 78 250 120T520 122 Q670 87 760 112T1070 119 Q1170 86 1500 115L1500 192Q1320 180 1170 192T880 185Q650 158 430 190T0 182Z"/>
+<path fill="#364457" opacity=".19" d="M0 181 Q150 150 300 177T620 175 Q760 131 970 164T1280 149 Q1400 130 1500 164L1500 211Q1210 182 1010 217T640 207 Q390 183 0 218Z"/>
+<circle cx="1250" cy="208" r="37" fill="#ffe8b6" opacity=".94"/>
+<ellipse cx="1247" cy="212" rx="104" ry="49" fill="#ffd2a0" opacity=".22"/>
+<path fill="#42516c" opacity=".6" d="M0 331L105 272L190 309L255 265L320 303L440 232L545 303L660 251L764 304L844 250L922 310L1039 242L1149 299L1215 273L1314 314L1418 253L1500 297L1500 560H0Z"/>
+<path fill="url(#mountain)" d="M0 356L140 278L244 315L319 269L404 320L526 246L622 323L704 278L816 332L898 265L1000 323L1080 285L1203 343L1354 289L1500 350L1500 560H0Z"/>
+<path fill="#192f45" d="M0 370 Q160 331 314 359T650 344 Q870 320 1080 360T1500 330L1500 560H0Z"/>
+<path fill="url(#lake)" d="M0 355 Q250 347 487 353T962 350Q1230 347 1500 351V560H0Z"/>
+<path stroke="#d59a8d" opacity=".32" stroke-width="2" fill="none" d="M500 379Q740 385 1010 376M625 411Q850 403 1240 411M730 442Q940 431 1380 443M300 473Q720 467 1080 477M650 497Q1000 493 1500 509"/>
+<path fill="url(#front)" d="M0 432Q80 421 173 443T380 453Q520 453 654 459T897 465Q1050 445 1170 470T1500 460V560H0Z"/>
+<path fill="#071421" d="M0 480L90 436L120 448L189 412L232 438L270 423L357 469L432 441L508 465L535 456L635 481L760 454L899 482L1010 457L1108 490L1213 463L1320 480L1430 447L1500 474V560H0Z"/>
+<rect width="1500" height="560" fill="url(#veil)"/>
+</svg>
