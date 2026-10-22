@@ -1,82 +1,133 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Flow TV · LG Bridge</title>
 <style>
-html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#070f20;color:#eaf0ff;font-family:Arial,sans-serif}
-iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#070f20}
-#loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#071223,#192455);z-index:10;text-align:center}
-#loading.done{display:none}h1{font-size:54px;letter-spacing:-2px;margin:0 0 12px}
-p{font-size:22px;line-height:1.5;color:#bfcae5;max-width:680px}
-#retry{display:none;border:1px solid #889cce;border-radius:14px;background:#263960;color:white;font:22px Arial;padding:15px 28px;margin:24px auto}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#080e17;color:#fff;font-family:Arial,sans-serif}
+iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#080e17}
+#loading{position:absolute;inset:0;z-index:10;background:linear-gradient(145deg,#070f1e,#172740);display:flex;align-items:center;justify-content:center;text-align:center}
+#loading.hidden{display:none}
+#loading .mark{width:88px;height:88px;margin:0 auto 22px;border-radius:23px;background:linear-gradient(130deg,#348fff,#5b5ad9);display:grid;place-items:center;font-size:64px;font-weight:750}
+#loading h1{font-size:45px;letter-spacing:-1.5px;margin:0}
+#loading p{font-size:20px;color:#c0cce0;line-height:1.5;max-width:640px}
+#retry{display:none;border:1px solid #8c9ebc;background:#2b3b54;border-radius:15px;color:#fff;padding:15px 25px;font-size:20px;margin:auto}
 </style>
 </head>
 <body>
 <iframe id="flow" title="Flow TV Online" src="https://aton-citizen.github.io/flow-tv/?tv=1"></iframe>
-<div id="loading"><div><h1>Flow TV</h1><p id="status">Conectando a interface e preparando a integração com a LG...</p><button id="retry">Tentar novamente</button></div></div>
+<div id="loading"><div>
+ <div class="mark">f</div><h1>Flow TV</h1><p id="status">Abrindo sua interface...</p>
+ <button id="retry">Tentar novamente</button>
+</div></div>
 <script>
 (function(){
 "use strict";
 var origin="https://aton-citizen.github.io";
-var frame=document.getElementById("flow");
-var loading=document.getElementById("loading");
-var status=document.getElementById("status");
-var timer=setTimeout(function(){
-  status.textContent="A interface não respondeu. Verifique a conexão da TV e abra o GitHub Pages no navegador.";
-  document.getElementById("retry").style.display="block";
-},15000);
-document.getElementById("retry").onclick=function(){
-  status.textContent="Reconectando...";document.getElementById("retry").style.display="none";
-  frame.src="https://aton-citizen.github.io/flow-tv/?tv=1&retry="+Date.now();
+var frame=document.getElementById("flow"),loading=document.getElementById("loading"),status=document.getElementById("status");
+var retry=document.getElementById("retry");
+var loaded=false;
+var timeout=setTimeout(function(){if(loaded)return;status.textContent="Não conseguimos carregar o Flow TV. Verifique a internet da televisão.";retry.style.display="block";},15000);
+function show(){loaded=true;clearTimeout(timeout);loading.classList.add("hidden");}
+retry.onclick=function(){loaded=false;retry.style.display="none";status.textContent="Tentando novamente...";frame.src="https://aton-citizen.github.io/flow-tv/?tv=1&reload="+Date.now();};
+var names={
+ netflix:["Netflix"],
+ youtube:["YouTube"],
+ prime:["Prime Video","Amazon Prime"],
+ disney:["Disney+"],
+ max:["Max","HBO Max"],
+ spotify:["Spotify"]
 };
-var allowed={
-  "netflix":true,
-  "youtube.leanback.v4":true,
-  "amazon":true,
-  "spotify-beehive":true
+var fallback={
+ netflix:["netflix"],
+ youtube:["youtube.leanback.v4","youtube.leanback"],
+ prime:["amazon"],
+ disney:["com.disney.disneyplus-prod"],
+ max:["com.wbd.stream","com.hbo.hbomax"],
+ spotify:["spotify-beehive"]
 };
-function reply(requestId,result){
-  try{frame.contentWindow.postMessage({flowTV:"bridge-result",requestId:requestId,result:result},origin);}catch(e){}
+function service(method,params,callback){
+ var called=false,uri="luna://com.webos.applicationManager";
+ function done(value){if(called)return;called=true;callback(value||{returnValue:false,errorText:"Sem resposta"});}
+ if(window.webOS && window.webOS.service && typeof window.webOS.service.request==="function"){
+  try{
+   window.webOS.service.request(uri,{method:method,parameters:params||{},onSuccess:done,onFailure:done});
+   setTimeout(function(){done({returnValue:false,errorText:"A LG não respondeu em 10 segundos."});},10000);
+   return;
+  }catch(err){done({returnValue:false,errorText:err.message});return;}
+ }
+ if(typeof window.PalmServiceBridge==="function"){
+  try{
+   var bridge=new window.PalmServiceBridge();
+   bridge.onservicecallback=function(raw){try{done(JSON.parse(raw));}catch(ex){done({returnValue:false,errorText:"Resposta inválida do webOS."});}};
+   bridge.call(uri+"/"+method,JSON.stringify(params||{}));
+   setTimeout(function(){done({returnValue:false,errorText:"A LG não respondeu em 10 segundos."});},10000);
+   return;
+  }catch(err){done({returnValue:false,errorText:err.message});return;}
+ }
+ done({returnValue:false,errorText:"Sem acesso à API Application Manager no aplicativo Flow TV."});
 }
-function launch(requestId,id){
-  if(typeof id!=="string" || !allowed[id]){reply(requestId,{returnValue:false,errorText:"ID do app não permitido nesta versão: "+String(id)});return;}
-  var uri="luna://com.webos.applicationManager";
-  var finished=false;
-  function done(value){if(finished)return;finished=true;reply(requestId,value);}
-  if(window.webOS && webOS.service && typeof webOS.service.request==="function"){
-    try{
-      webOS.service.request(uri,{method:"launch",parameters:{id:id},onSuccess:done,onFailure:done});
-      setTimeout(function(){done({returnValue:false,errorText:"Sem retorno da API (12s)"});},12000);
-      return;
-    }catch(e){done({returnValue:false,errorText:e.message});return;}
+function reply(id,result){
+ if(!id || typeof id!=="string")return;
+ try{frame.contentWindow.postMessage({flowTV:"bridge-result",requestId:id,result:result},origin);}catch(err){}
+}
+function normalize(s){return String(s||"").toLowerCase().normalize?String(s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,""):String(s||"").toLowerCase();}
+function findMatch(apps,key){
+ var labels=names[key]||[],ids=fallback[key]||[];
+ for(var i=0;i<apps.length;i++){
+  var a=apps[i];if(!a||!a.id)continue;
+  if(ids.indexOf(String(a.id))>=0)return String(a.id);
+ }
+ for(var j=0;j<apps.length;j++){
+  var obj=apps[j];if(!obj||!obj.id)continue;
+  var name=normalize(obj.title||obj.name||"");
+  for(var n=0;n<labels.length;n++){if(name===normalize(labels[n]))return String(obj.id);}
+ }
+ return null;
+}
+function launchCandidates(requestId,ids,index,lastError){
+ if(index>=ids.length){reply(requestId,lastError||{returnValue:false,errorText:"O aplicativo não foi encontrado nesta LG."});return;}
+ service("launch",{id:ids[index]},function(r){
+  if(r&&r.returnValue===true){reply(requestId,r);return;}
+  launchCandidates(requestId,ids,index+1,r);
+ });
+}
+function launchService(requestId,key){
+ if(!Object.prototype.hasOwnProperty.call(names,key)){reply(requestId,{returnValue:false,errorText:"Serviço não reconhecido."});return;}
+ service("listApps",{},function(r){
+  if(r&&r.returnValue===true&&Array.isArray(r.apps)){
+   var appid=findMatch(r.apps,key);
+   if(!appid){reply(requestId,{returnValue:false,errorText:"Não encontrei esse serviço entre os aplicativos instalados na TV."});return;}
+   service("launch",{id:appid},function(result){reply(requestId,result);});
+   return;
   }
-  if(typeof window.PalmServiceBridge==="function"){
-    try{
-      var bridge=new window.PalmServiceBridge();
-      bridge.onservicecallback=function(raw){try{done(JSON.parse(raw));}catch(e){done({returnValue:false,errorText:"Resposta inválida da TV"});}};
-      bridge.call(uri+"/launch",JSON.stringify({id:id}));
-      setTimeout(function(){done({returnValue:false,errorText:"Sem retorno da API (12s)"});},12000);
-      return;
-    }catch(e){done({returnValue:false,errorText:e.message});return;}
-  }
-  done({returnValue:false,errorText:"webOS não disponibilizou a API nesta janela do aplicativo."});
+  launchCandidates(requestId,fallback[key]||[],0,null);
+ });
+}
+function openInputs(requestId,key){
+ if(key==="live"){
+  service("launch",{id:"com.webos.app.livetv"},function(r){reply(requestId,r);});
+  return;
+ }
+ service("launch",{id:"com.webos.app.inputmgr"},function(r){
+  if(r&&r.returnValue===true){reply(requestId,r);return;}
+  reply(requestId,{returnValue:false,errorText:"Não foi possível abrir o seletor de entradas desta LG. Use o botão Inputs/Source no controle."});
+ });
 }
 window.addEventListener("message",function(event){
-  if(event.origin!==origin || event.source!==frame.contentWindow)return;
-  var d=event.data;
-  if(!d || typeof d!=="object")return;
-  if(d.flowTV==="bridge-ready"){
-    clearTimeout(timer);loading.classList.add("done");return;
-  }
-  if(d.flowTV!=="bridge-request" || !d.requestId)return;
-  if(d.method!=="launch"){reply(d.requestId,{returnValue:false,errorText:"Operação não permitida"});return;}
-  launch(d.requestId,d.parameters && d.parameters.id);
+ if(event.origin!==origin||event.source!==frame.contentWindow)return;
+ var d=event.data;if(!d||typeof d!=="object")return;
+ if(d.flowTV==="bridge-ready"){show();return;}
+ if(d.flowTV!=="bridge-request"||typeof d.requestId!=="string")return;
+ if(d.method==="ping"){
+  reply(d.requestId,{returnValue:!!(window.PalmServiceBridge||(window.webOS&&window.webOS.service)),message:"Ponte Flow TV v0.5.0 carregada no webOS."});return;
+ }
+ if(d.method==="launchService"){launchService(d.requestId,d.parameters&&d.parameters.service);return;}
+ if(d.method==="openInputs"){openInputs(d.requestId,d.parameters&&d.parameters.input);return;}
+ reply(d.requestId,{returnValue:false,errorText:"Comando não permitido pela ponte Flow TV."});
 });
 frame.addEventListener("load",function(){
-  setTimeout(function(){if(!loading.classList.contains("done")){loading.classList.add("done");clearTimeout(timer);}},5500);
+ setTimeout(function(){if(!loaded)show();},5500);
 });
 })();
-</script>
-</body>
-</html>
+</script></body></html>
