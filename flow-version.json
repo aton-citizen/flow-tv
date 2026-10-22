@@ -1,8 +1,8 @@
 {
   "name": "Flow TV",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "build": "github-pages",
-  "status": "prototype",
+  "status": "beta",
   "updated": "2026-10-21",
-  "notes": "Layout ampliado para TV; ponte nativa experimental disponível"
+  "notes": "Home minimalista sem filmes e séries; aplicativos, entradas, ajustes e ponte webOS"
 }
